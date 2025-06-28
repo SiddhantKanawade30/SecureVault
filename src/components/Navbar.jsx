@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Lock, Menu, X, Shield, User, LogIn } from 'lucide-react';
+import { Signup } from './Signup';
+import { Login } from './Login';
+
+
+
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('Home');
+  const [showSignup, setShowSignup] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +31,7 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar */}
+      
       <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? 'backdrop-blur-xl bg-black/30' : 'bg-transparent'
       }`}>
@@ -34,7 +41,7 @@ const Navbar = () => {
             : 'bg-white/10 border-white/10 hover:bg-white/15 hover:border-white/20'
         }`}>
           
-          {/* Logo Section */}
+        
           <div className='flex items-center cursor-pointer font-bold text-xl lg:text-2xl group'>
             <div className="relative mr-3">
               <Lock className="w-7 h-7 lg:w-8 lg:h-8 text-violet-400 group-hover:text-violet-300 transition-all duration-300 group-hover:rotate-12 group-hover:scale-110" />
@@ -45,7 +52,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          {/* Desktop Navigation */}
+          
           <div className="hidden md:block">
             <ul className='flex items-center gap-1'>
               {navItems.map((item) => (
@@ -73,9 +80,13 @@ const Navbar = () => {
                 </li>
               ))}
               
-              {/* Sign Up Button */}
+            
+              {/* Desktop Sign Up button */}
               <li className="ml-4">
-                <button className="group relative px-6 py-2.5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-300 hover:scale-105 overflow-hidden">
+                <button
+                  className="group relative px-6 py-2.5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-300 hover:scale-105 overflow-hidden"
+                  onClick={() => setShowSignup(true)}
+                >
                   <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="relative flex items-center gap-2">
                     <LogIn className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
@@ -86,7 +97,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Mobile Menu Button */}
+          
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -102,7 +113,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      
       <div className={`fixed inset-0 z-40 transition-all duration-500 md:hidden ${
         isMobileMenuOpen 
           ? 'backdrop-blur-xl bg-black/50 opacity-100' 
@@ -135,21 +146,34 @@ const Navbar = () => {
               </li>
             ))}
             
-            {/* Mobile Sign Up */}
+            
+            {/* Mobile Sign Up button */}
             <li className="pt-4 border-t border-white/10">
-              <button className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-300">
+              <button
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-300"
+                onClick={() => setShowSignup(true)}
+              >
                 <LogIn className="w-5 h-5" />
                 Sign Up
               </button>
+              
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Spacer to prevent content overlap */}
+      
       <div className="h-20 lg:h-24"></div>
+
+      
+      
+
+
+          <Signup open={showSignup} onClose={() => setShowSignup(false)} switchToLogin={() => {setShowSignup(false); setShowLogin(true);}}/>
+          <Login open={showLogin} onClose={() => setShowLogin(false)} switchToSignup={() => {setShowLogin(false); setShowSignup(true);}} />
+
     </>
   );
 };
 
-export default Navbar;  
+export default Navbar;

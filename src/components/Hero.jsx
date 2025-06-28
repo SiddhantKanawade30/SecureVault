@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Shield, Lock, Key, Eye, FileText, Database } from 'lucide-react';
+import { Signup } from './Signup';
 
 export const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+  
 
   useEffect(() => {
     setIsVisible(true);
