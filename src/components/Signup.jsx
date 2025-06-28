@@ -1,8 +1,4 @@
 
-
-import React, { useState } from "react";
-import { Login } from "./Login";
-
 export const Signup = ({ open, onClose , switchToLogin  }) => {
     
   if (!open) return null;
