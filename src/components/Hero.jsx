@@ -20,7 +20,7 @@ export const Hero = () => {
 
   return (
     <>
-      {/* Animated background particles */}
+      
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0">
           {[...Array(20)].map((_, i) => (
@@ -38,7 +38,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Hero Header */}
+      
       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="flex justify-center text-white text-6xl mt-20 font-sans font-bold tracking-tight">
           <div className="bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent animate-pulse">
@@ -52,7 +52,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* CTA Button */}
+      
       <div className={`flex justify-center mt-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <button className="group relative px-8 py-4 text-xl font-semibold text-white bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 rounded-2xl shadow-2xl hover:shadow-violet-500/25 transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
@@ -63,11 +63,11 @@ export const Hero = () => {
         </button>
       </div>
 
-      {/* Enhanced Bento Grid */}
+      
       <div className={`flex justify-center mt-20 px-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl w-full">
           
-          {/* Large Feature Card */}
+          
           <div 
             className="md:row-span-2 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700 h-80 md:h-full rounded-3xl p-6 border border-zinc-700/50 hover:border-violet-500/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-violet-500/10 cursor-pointer group"
             onMouseEnter={() => setHoveredCard(0)}
@@ -88,7 +88,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Center Column - Large Card */}
+          
           <div className="bg-gradient-to-b from-zinc-800 via-zinc-700 to-zinc-600 h-80 rounded-3xl border border-zinc-700/50 hover:border-indigo-500/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-indigo-500/10 cursor-pointer group relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             <div className="relative h-full p-6 flex flex-col justify-end">
@@ -98,7 +98,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Right Column - Stacked Cards */}
+          
           <div className="grid grid-rows-2 gap-4">
             <div 
               className="bg-gradient-to-bl from-zinc-800 via-zinc-700 to-zinc-600 rounded-3xl border border-zinc-700/50 hover:border-purple-500/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/10 cursor-pointer group p-4"
@@ -120,7 +120,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Bottom Left */}
+          
           <div 
             className="bg-gradient-to-tr from-zinc-800 via-zinc-700 to-zinc-600 rounded-3xl border border-zinc-700/50 hover:border-emerald-500/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/10 cursor-pointer group p-6"
             onMouseEnter={() => setHoveredCard(4)}
@@ -131,7 +131,7 @@ export const Hero = () => {
             <p className="text-gray-300">{features[4].desc}</p>
           </div>
 
-          {/* Bottom Center - Split Cards */}
+          
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-gradient-to-t from-zinc-800 via-zinc-700 to-zinc-600 rounded-3xl border border-zinc-700/50 hover:border-orange-500/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer group p-4 flex flex-col items-center justify-center text-center">
               <Database className="w-8 h-8 text-orange-400 mb-2 group-hover:scale-110 transition-transform duration-300" />
@@ -143,7 +143,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Bottom Right */}
+          
           <div 
             className="bg-gradient-to-tl from-zinc-800 via-zinc-700 to-zinc-600 h-80 rounded-3xl border border-zinc-700/50 hover:border-yellow-500/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 cursor-pointer group p-6"
             onMouseEnter={() => setHoveredCard(5)}
@@ -163,7 +163,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Trust Indicators */}
+      
       <div className={`flex justify-center mt-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="flex flex-wrap justify-center gap-8 text-gray-400 text-sm">
           <div className="flex items-center gap-2">
