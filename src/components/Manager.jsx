@@ -2,6 +2,7 @@ import { Plus, Lock, LogOut } from "lucide-react";
 import React, { useState } from "react";
 import { Logout } from "./Logout";
 import { Create } from "./Create";
+import Card from "./Card";
 
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
@@ -43,17 +44,10 @@ export const Manager = () => {
       </div>
 
       {/* Password Cards Grid */}
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {[1, 2, 3].map((_, index) => (
-          <div
-            key={index}
-            className="bg-neutral-900 p-5 rounded-xl shadow hover:shadow-purple-600/20 transition border border-neutral-800"
-          >
-            <h2 className="text-lg font-semibold mb-1">example.com</h2>
-            <p className="text-sm text-gray-400">Username: johndoe</p>
-            <p className="text-sm text-gray-400">Password: ********</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-3">
+      <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
+      <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
+      <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
       </div>
     </div>
   );
