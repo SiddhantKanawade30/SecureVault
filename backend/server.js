@@ -2,8 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { userModel, passModel } from "./db.js";
-import { jwt } from "jsonwebtoken"
-import {bcrypt} from "bcrypt"
+import { userMiddleware } from "./middleware.js"
+import  jwt  from "jsonwebtoken"
+import bcrypt from "bcrypt"
 const app = express()
 dotenv.config();
 app.use(express.json());
@@ -58,8 +59,67 @@ app.post("/login",async(req,res)=>{
 
 })
 
+app.post("/create",userMiddleware, async(req,res)=>{
+        const {userId , url , userName , password} = req.body
 
+        try {
+            await passModel.create({
+                userId,
+                url,
+                userName,
+                password
+            })
 
+            res.status(201).json({
+                message : "credentials created sucessfully"
+            })
+        }catch(e){
+            res.json({
+                message : "error occured is " + e.console.error()
+            })
+        }
+})
+
+app.delete("/delete" , userMiddleware , async(req,res)=>{
+
+    const {credentialId} = req.body
+
+    try{
+        await passModel.deleteOne({
+                _id : credentialId
+        })
+        res.json({
+            message : "credentials deleted"
+        })
+    }catch{
+        res.json({
+            message : "There was a problem deleting credentials"
+        })
+    }
+
+})
+
+app.put("/edit" , async(req,res)=>{
+    const {credentialId , url , userName , password} = req.body;
+
+    try{
+        await passModel.updateOne(
+            {_id : credentialId},
+            {
+                $set : {
+                    url ,
+                    userName,
+                    password
+                }
+            }
+        )
+        res.json({
+            message : "edited credentials"
+        })
+    }catch{
+        message : "there was some error editing credentials"
+    }
+})
 
 
 app.listen(3000)

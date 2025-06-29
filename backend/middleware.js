@@ -1,14 +1,14 @@
-import {express} from "express"
-import {jwt} from "jsonwebtoken"  
+import express from "express"
+import jwt from "jsonwebtoken"  
 import dotenv from "dotenv";
 dotenv.config();
 
 
 
-export const userMiddleware = (req,res,next) => {
+export const userMiddleware = async(req,res,next) => {
 
 const token = req.headers.token;
-const decodedToken = jwt.verify(token,process.env.USER_JWT)
+const decodedToken = await jwt.verify(token,process.env.USER_JWT)
 
 if(decodedToken){
     req.userId = decodedToken.id
