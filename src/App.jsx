@@ -1,8 +1,10 @@
-// import Dashboard from "./pages/Dashboard"
+import Dashboard from "./pages/Dashboard"
 import {BrowserRouter , Route, Routes} from 'react-router-dom'
 import {Signup} from "./components/Signup"
 import {Login} from "./components/Login"
-import { Create } from "./components/Create"
+// import { Create } from "./components/Create"
+import { Manager } from './components/Manager'
+import { Logout } from './components/Logout'
 
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
       <div class="absolute top-0 z-[-2] min-h-screen w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
         
 
-        <Create />
+        <Manager />
 
         {/* <BrowserRouter>
           <Routes>

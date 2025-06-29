@@ -35,7 +35,7 @@ const Navbar = () => {
       <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? 'backdrop-blur-xl bg-black/30' : 'bg-transparent'
       }`}>
-        <div className={`flex justify-between items-center p-4 mx-4 lg:mx-10 my-3 lg:my-5 text-white rounded-2xl border transition-all duration-500 ${
+        <div className={`flex justify-between items-center p-3 mx-4 lg:mx-10 my-3 lg:my-5 text-white rounded-2xl border transition-all duration-500 ${
           isScrolled 
             ? 'bg-black/40 border-white/20 shadow-2xl shadow-black/20' 
             : 'bg-white/10 border-white/10 hover:bg-white/15 hover:border-white/20'
