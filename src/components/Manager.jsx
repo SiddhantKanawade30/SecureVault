@@ -45,7 +45,7 @@ export const Manager = () => {
 
       {/* Password Cards Grid */}
       <div className="grid grid-cols-3">
-      <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
+      <Card website={"goole.in"} username={"sidd"} password={"s"} />
       <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
       <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
       </div>
