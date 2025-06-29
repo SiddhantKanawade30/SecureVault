@@ -6,12 +6,11 @@ import { Login } from './Login';
 
 
 
-const Navbar = () => {
+const Navbar = ({ setShowSignup, setShowLogin }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('Home');
-  const [showSignup, setShowSignup] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -169,8 +168,7 @@ const Navbar = () => {
       
 
 
-          <Signup open={showSignup} onClose={() => setShowSignup(false)} switchToLogin={() => {setShowSignup(false); setShowLogin(true);}}/>
-          <Login open={showLogin} onClose={() => setShowLogin(false)} switchToSignup={() => {setShowLogin(false); setShowSignup(true);}} />
+          
 
     </>
   );

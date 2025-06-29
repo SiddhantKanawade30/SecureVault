@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Shield, Lock, Key, Eye, FileText, Database } from 'lucide-react';
 import { Signup } from './Signup';
 
-export const Hero = () => {
+export const Hero = ({setShowSignup}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
   
@@ -56,8 +56,8 @@ export const Hero = () => {
 
       
       <div className={`flex justify-center mt-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <button className="group relative px-8 py-4 text-xl font-semibold text-white bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 rounded-2xl shadow-2xl hover:shadow-violet-500/25 transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+        <button onClick={() => setShowSignup(true)} className="group relative px-8 py-4 text-xl font-semibold text-white bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 rounded-2xl shadow-2xl hover:shadow-violet-500/25 transform hover:scale-105 transition-all duration-300 ease-out overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-indigo-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"  ></div>
           <div className="relative flex items-center gap-3">
             <Shield className="w-6 h-6" />
             Get Started Securely
