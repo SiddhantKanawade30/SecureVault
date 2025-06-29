@@ -32,14 +32,14 @@ app.post("/signup",async(req,res)=>{
 app.post("/login",async(req,res)=>{
     const {email , password} = req.body;
 
-    const response = userModel.findOne({email})
+    const response = await userModel.findOne({email})
 
     if(!response){
-        message : 'user not found in our database'
-        return 
+        return res.json({message : 'user not found in our database'})
+         
     }
 
-    const decodedPass = bcrypt.compare(password,response.password)
+    const decodedPass = await bcrypt.compare(password,response.password)
 
     if(decodedPass){
         const token = jwt.sign({
@@ -60,11 +60,11 @@ app.post("/login",async(req,res)=>{
 })
 
 app.post("/create",userMiddleware, async(req,res)=>{
-        const {userId , url , userName , password} = req.body
+        const { url , userName , password} = req.body
 
         try {
             await passModel.create({
-                userId,
+                userId : req.userId,
                 url,
                 userName,
                 password
@@ -74,6 +74,7 @@ app.post("/create",userMiddleware, async(req,res)=>{
                 message : "credentials created sucessfully"
             })
         }catch(e){
+            console.error(e);
             res.json({
                 message : "error occured is " + e.console.error()
             })
@@ -99,7 +100,7 @@ app.delete("/delete" , userMiddleware , async(req,res)=>{
 
 })
 
-app.put("/edit" , async(req,res)=>{
+app.put("/edit" ,userMiddleware, async(req,res)=>{
     const {credentialId , url , userName , password} = req.body;
 
     try{
@@ -117,8 +118,18 @@ app.put("/edit" , async(req,res)=>{
             message : "edited credentials"
         })
     }catch{
-        message : "there was some error editing credentials"
+        res.json({message : "there was some error editing credentials"})
     }
+})
+
+app.get("/vault" , userMiddleware , async(req,res)=>{
+    const content = await passModel.find({
+        userId : req.userId
+    })
+
+    res.json({
+        content
+    })
 })
 
 

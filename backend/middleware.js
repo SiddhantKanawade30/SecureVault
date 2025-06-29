@@ -8,15 +8,19 @@ dotenv.config();
 export const userMiddleware = async(req,res,next) => {
 
 const token = req.headers.token;
-const decodedToken = await jwt.verify(token,process.env.USER_JWT)
+if(!token){
+    return res.status(401).json({
+        message: "Access denied. No token provided."
+    })
+}
 
-if(decodedToken){
+
+try{
+    const decodedToken = jwt.verify(token,process.env.USER_JWT)
     req.userId = decodedToken.id
     next()
-}else{
-    res.json({
-        message : "acess rejected"
-})
-
+}catch(e){
+    message: "Invalid token";
+      error: e.message
 }
 }

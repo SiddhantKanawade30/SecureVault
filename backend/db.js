@@ -9,7 +9,7 @@ const userSchema = new Schema({
 });
 
 const passCard = new Schema({
-  userId: ObjectId,
+  userId: {type : ObjectId , required : true},
   url: String,
   userName: String,
   password: String,

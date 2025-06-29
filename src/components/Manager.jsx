@@ -7,11 +7,76 @@ import Card from "./Card";
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [createCardOpen, setCreateCardOpen] = useState(false);
+  const [credentials, setCredentials] = useState([]);
 
   const handleLogout = () => {
     setLogoutOpen(true);
     console.log("Logged out");
   };
+
+  const handleDelete = async({credentialId}) => {
+
+    try{
+    await axios.delete("http://localhost:3000/delete",{
+        headers:{
+        token : localStorage.getItem("token")
+      },
+      data: { credentialId }
+    })
+    setCredentials(credentials.filter((cred) => cred._id !== credentialId));
+  }catch (err) {
+      console.error("Delete error:", err);
+    }
+  }
+
+  const handelEdit = async(updatedData)=>{
+        const { _id: credentialId, website: newURL, username: newUsername, password: newPassword } = updatedData;
+
+        try{
+    await axios.put("http://localhost:3000/edit",{
+      credentialId,
+      url : newURL,
+      userName : newUsername,
+      password : newPassword
+    },{
+      headers : {
+        token : localStorage.getItem("token")
+      }
+    })
+
+    setCredentials((prev) =>
+        prev.map((cred) =>
+          cred._id === credentialId
+            ? { ...cred, url: newURL, userName: newUsername, password: newPassword }
+            : cred
+        )
+      );
+      
+  }catch (err) {
+      console.error("Edit error:", err);
+    }
+  }
+
+  useEffect(()=>{
+    const fetchVault = async()=>{
+      try{
+        const res = await axios.get("http://localhost:3000/vault",{
+          headers : {
+            token : localStorage.getItem("token")
+          }
+        })
+        setCredentials(res.data.content)
+
+      }catch(e){
+        console.error("Error fetching vault:", e);
+      }
+    }
+
+    fetchVault()
+  },[])
+
+
+
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white px-6 py-10">
@@ -45,11 +110,15 @@ export const Manager = () => {
 
       {/* Password Cards Grid */}
       <div className="grid grid-cols-3">
-      <Card website={"goole.in"} username={"sidd"} password={"s"} />
-      <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
-      <Card website={"goole.in"} username={"sidd"} password={"sidd123"} />
+      {/* <Card 
+  website="google.in" 
+  username="sidd" 
+  password="s" 
+  onEdit={() => console.log("Edit clicked")} 
+  onDelete={() => console.log("Delete clicked")} 
+/> */}
+
       </div>
     </div>
   );
 };
-
