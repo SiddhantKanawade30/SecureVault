@@ -1,6 +1,14 @@
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 export const Logout = ({ open, onClose }) => {
+  const navigate = useNavigate()
+  const logoutFn = () =>{
+    localStorage.removeItem("token")
+    navigate("/")
+  }
   if (!open) return null;
 
   return (
@@ -24,8 +32,8 @@ export const Logout = ({ open, onClose }) => {
         <div className="flex justify-center gap-4 mt-6">
           <button
             onClick={() => {
-              // handle real logout logic here
-              console.log("User logged out");
+              logoutFn()
+              
               onClose();
             }}
             className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-medium transition"

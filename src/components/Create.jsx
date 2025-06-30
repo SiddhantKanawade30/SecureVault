@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Eye, EyeClosed } from "lucide-react";
 import { X } from "lucide-react";
+import axios from "axios";
 
 const inputStyle =
   "bg-black/30 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500 w-full text-white placeholder-gray-300";
@@ -12,11 +13,19 @@ export const Create = ({ open, onClose }) => {
   const PasswordRef = useRef();
 
   function saveCredentials() {
-    const Url = UrlRef.current.value;
-    const username = UsernameRef.current.value;
+    const url = UrlRef.current.value;
+    const userName = UsernameRef.current.value;
     const password = PasswordRef.current.value;
 
-    alert(`Your Url is ${Url} , ${username} , ${password}`);
+    axios.post("http://localhost:3000/create",{
+      url,
+      userName,
+      password
+    },{
+      headers : {
+        token : localStorage.getItem("token")
+      }
+    })
   }
 
   if (!open) return null;

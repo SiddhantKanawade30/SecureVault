@@ -3,7 +3,7 @@ import React, { useState ,useEffect } from "react";
 import { Logout } from "./Logout";    
 import { Create } from "./Create";
 import Card from "./Card";
-import axios from "axios"
+import axios from "axios";
 
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
@@ -30,7 +30,7 @@ export const Manager = () => {
     }
   }
 
-  const handelEdit = async(updatedData)=>{
+  const handleEdit = async(updatedData)=>{
         const { _id: credentialId, website: newURL, username: newUsername, password: newPassword } = updatedData;
 
         try{
@@ -74,7 +74,7 @@ export const Manager = () => {
     }
 
     fetchVault()
-  },[])
+  },[credentials])
 
 
 
@@ -118,7 +118,7 @@ export const Manager = () => {
             website={cred.url}
             username={cred.userName}
             password={cred.password}
-            onDelete={() => handleDelete(cred._id)}
+            onDelete={() => handleDelete({ ...updated, _id: cred._id })}
             onEdit={(updated) => handleEdit({ ...updated, _id: cred._id })}
           />
           </div>

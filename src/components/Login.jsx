@@ -1,5 +1,39 @@
+import { useRef } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 export const Login = ({ open, onClose , switchToSignup }) => {
+
+const emailRef = useRef()
+const passwordRef = useRef()
+const navigate = useNavigate()
+
+const login = async(e) =>{
+  e.preventDefault()
+  const email = emailRef.current.value
+  const password = passwordRef.current.value
+
+  try{
+  const response = await axios.post("http://localhost:3000/login",{
+    email,
+    password
+  })
+
+  localStorage.setItem("token",response.data.token)
+  onClose();
+  navigate("/manager")
+
+  }catch(e){
+    console.log("there was some error")
+          alert("Invalid credentials");
+
+  }
+
+ 
+
+}
+
   if (!open) return null;
 
   return (
@@ -17,17 +51,20 @@ export const Login = ({ open, onClose , switchToSignup }) => {
 
         <form className="flex flex-col gap-4">
           <input
+          ref={emailRef}
             type="email"
             placeholder="Email"
             className="bg-neutral-800 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500"
           />
           <input
+          ref={passwordRef}
             type="password"
             placeholder="Password"
             className="bg-neutral-800 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500"
           />
 
           <button
+            onClick={login}
             type="submit"
             className="bg-purple-600 hover:bg-purple-700 transition p-3 rounded-lg font-medium"
           >

@@ -1,5 +1,26 @@
+import React from "react";
+import { useRef } from "react";
+import axios from "axios";
+
 
 export const Signup = ({ open, onClose , switchToLogin  }) => {
+
+  const fullNameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+
+  const signup = async() =>{
+      const userName = fullNameRef.current.value;
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+
+      axios.post("http://localhost:3000/signup",{
+        userName,
+        email,
+        password
+      })
+  }
+
     
   if (!open) return null;
 
@@ -18,22 +39,30 @@ export const Signup = ({ open, onClose , switchToLogin  }) => {
 
         <form className="flex flex-col gap-4">
           <input
+           ref={fullNameRef}
             type="text"
             placeholder="Full Name"
             className="bg-neutral-800 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500"
           />
           <input
+          ref={emailRef}
             type="email"
             placeholder="Email"
             className="bg-neutral-800 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500"
           />
           <input
+          ref={passwordRef}
             type="password"
             placeholder="Password"
             className="bg-neutral-800 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500"
           />
 
-          <button
+          <button 
+          onClick={()=>{
+            signup()
+            switchToLogin()
+          }
+          }
             type="submit"
             className="bg-purple-600 hover:bg-purple-700 transition p-3 rounded-lg font-medium"
           >
