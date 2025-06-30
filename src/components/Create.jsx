@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Eye, EyeClosed } from "lucide-react";
 import { X } from "lucide-react";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 
 const inputStyle =
   "bg-black/30 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500 w-full text-white placeholder-gray-300";
@@ -12,20 +13,34 @@ export const Create = ({ open, onClose }) => {
   const UsernameRef = useRef();
   const PasswordRef = useRef();
 
-  function saveCredentials() {
+  const masterPassword = import.meta.env.VITE_MASTER_PASS
+
+  const encryptPassword = (plainText, masterPassword) => {
+    return CryptoJS.AES.encrypt(plainText, masterPassword).toString();
+  };
+
+  
+
+  const saveCredentials = async() => {
     const url = UrlRef.current.value;
     const userName = UsernameRef.current.value;
-    const password = PasswordRef.current.value;
-
-    axios.post("http://localhost:3000/create",{
+    const encryptedPass = encryptPassword(PasswordRef.current.value,masterPassword)
+    
+    try{
+      await axios.post("http://localhost:3000/create",{
       url,
       userName,
-      password
+      password : encryptedPass
     },{
       headers : {
         token : localStorage.getItem("token")
       }
     })
+    }catch(error){
+      console.error("Error saving credential:", error);
+    alert("Failed to save credentials.");
+    }
+    
   }
 
   if (!open) return null;
@@ -79,7 +94,8 @@ export const Create = ({ open, onClose }) => {
             </div>
 
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 saveCredentials();
                 onClose();
               }}

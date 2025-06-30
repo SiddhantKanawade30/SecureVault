@@ -5,6 +5,10 @@ import { Create } from "./Create";
 import Card from "./Card";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
+
+
+
 
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
@@ -17,6 +21,12 @@ if (!token) {
   navigate("/")
 }
 
+const masterPassword = import.meta.env.VITE_MASTER_PASS;
+
+const decryptPassword = (cipherText, masterPassword) => {
+  const bytes = CryptoJS.AES.decrypt(cipherText, masterPassword);
+  return bytes.toString(CryptoJS.enc.Utf8);
+};
 useEffect(() => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -131,11 +141,11 @@ useEffect(() => {
             key={cred._id}
             website={cred.url}
             username={cred.userName}
-            password={cred.password}
+            password= {decryptPassword(cred.password,masterPassword)}
             onDelete={() => handleDelete({ credentialId: cred._id })}
             onEdit={(updated) => handleEdit({ ...updated, _id: cred._id })}
           />
-          </div>
+            </div>
         ))}
       </div>
     </div>
