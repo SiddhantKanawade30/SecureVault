@@ -3,11 +3,13 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { userModel, passModel } from "./db.js";
 import { userMiddleware } from "./middleware.js"
+import cors from "cors"
 import  jwt  from "jsonwebtoken"
 import bcrypt from "bcrypt"
 const app = express()
 dotenv.config();
 app.use(express.json());
+app.use(cors())
 
 
 mongoose.connect(process.env.MONGO_URL)

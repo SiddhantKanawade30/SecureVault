@@ -1,8 +1,9 @@
 import { Plus, Lock, LogOut } from "lucide-react";
-import React, { useState } from "react";
-import { Logout } from "./Logout";
+import React, { useState ,useEffect } from "react";
+import { Logout } from "./Logout";    
 import { Create } from "./Create";
 import Card from "./Card";
+import axios from "axios"
 
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
@@ -51,7 +52,7 @@ export const Manager = () => {
             : cred
         )
       );
-      
+
   }catch (err) {
       console.error("Edit error:", err);
     }
@@ -109,15 +110,19 @@ export const Manager = () => {
       </div>
 
       {/* Password Cards Grid */}
-      <div className="grid grid-cols-3">
-      {/* <Card 
-  website="google.in" 
-  username="sidd" 
-  password="s" 
-  onEdit={() => console.log("Edit clicked")} 
-  onDelete={() => console.log("Delete clicked")} 
-/> */}
-
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {credentials.map((cred) => (
+          <div>
+          <Card
+            key={cred._id}
+            website={cred.url}
+            username={cred.userName}
+            password={cred.password}
+            onDelete={() => handleDelete(cred._id)}
+            onEdit={(updated) => handleEdit({ ...updated, _id: cred._id })}
+          />
+          </div>
+        ))}
       </div>
     </div>
   );
