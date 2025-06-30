@@ -4,11 +4,25 @@ import { Logout } from "./Logout";
 import { Create } from "./Create";
 import Card from "./Card";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [createCardOpen, setCreateCardOpen] = useState(false);
   const [credentials, setCredentials] = useState([]);
+const navigate = useNavigate()
+
+const token = localStorage.getItem("token");
+if (!token) {
+  navigate("/")
+}
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    navigate("/");
+  }
+}, [navigate]);
 
   const handleLogout = () => {
     setLogoutOpen(true);
@@ -74,7 +88,7 @@ export const Manager = () => {
     }
 
     fetchVault()
-  },[credentials])
+  },[])
 
 
 
@@ -118,7 +132,7 @@ export const Manager = () => {
             website={cred.url}
             username={cred.userName}
             password={cred.password}
-            onDelete={() => handleDelete({ ...updated, _id: cred._id })}
+            onDelete={() => handleDelete({ credentialId: cred._id })}
             onEdit={(updated) => handleEdit({ ...updated, _id: cred._id })}
           />
           </div>

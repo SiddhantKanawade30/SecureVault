@@ -88,9 +88,7 @@ app.delete("/delete" , userMiddleware , async(req,res)=>{
     const {credentialId} = req.body
 
     try{
-        await passModel.deleteOne({
-                _id : credentialId
-        })
+        await passModel.deleteOne({ _id : credentialId })
         res.json({
             message : "credentials deleted"
         })
