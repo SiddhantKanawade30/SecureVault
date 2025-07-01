@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Eye, EyeClosed } from "lucide-react"; // make sure lucide-react is installed
+import { Eye, EyeClosed } from "lucide-react"; 
 import axios from "axios";
 
 export const Signup = ({ open, onClose, switchToLogin }) => {
@@ -21,10 +21,10 @@ export const Signup = ({ open, onClose, switchToLogin }) => {
         email,
         password,
       });
-      // handle success (maybe clear fields or show message)
+      
     } catch (error) {
       console.error("Signup error:", error);
-      // handle error (show message)
+      
     }
   };
 
@@ -33,7 +33,7 @@ export const Signup = ({ open, onClose, switchToLogin }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-70 backdrop-blur-sm">
       <div className="bg-neutral-900 rounded-2xl shadow-lg w-[90%] max-w-md p-8 text-white relative">
-        {/* Close button */}
+        
         <button
           className="absolute top-4 right-4 text-white hover:text-red-400"
           onClick={onClose}

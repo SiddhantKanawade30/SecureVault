@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Shield, Users, Award, Globe, Zap, Heart, ArrowRight, CheckCircle } from 'lucide-react';
+import { Shield, Users, Award, Globe, Zap, Heart} from 'lucide-react';
 
 export const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -68,7 +68,7 @@ export const About = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-900 via-gray-900 to-black text-white overflow-hidden">
-      {/* Animated Background */}
+      
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0">
           {[...Array(15)].map((_, i) => (
@@ -86,7 +86,7 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Hero Section */}
+      
       <div className={`relative z-10 pt-20 pb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="text-center px-4">
           <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-6">
@@ -100,7 +100,7 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Stats Section */}
+     
       <div className={`relative z-10 px-4 mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -121,7 +121,7 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Why We're Different */}
+     
       <div className={`relative z-10 px-4 mb-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
@@ -142,7 +142,7 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Timeline Section */}
+      
       <div className={`relative z-10 px-4 mb-20 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
@@ -178,7 +178,7 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Values Section */}
+      
       <div className={`relative z-10 px-4 mb-20 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">

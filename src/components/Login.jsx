@@ -36,7 +36,7 @@ export const Login = ({ open, onClose, switchToSignup }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-70 backdrop-blur-sm">
       <div className="bg-neutral-900 rounded-2xl shadow-lg w-[90%] max-w-md p-8 text-white relative">
-        {/* Close button */}
+        
         <button
           className="absolute top-4 right-4 text-white hover:text-red-400"
           onClick={onClose}

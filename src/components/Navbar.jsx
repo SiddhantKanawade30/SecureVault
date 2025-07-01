@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Lock, Menu, X, Shield, User, LogIn } from 'lucide-react';
-import { Signup } from './Signup';
-import { Login } from './Login';
+
+import { useNavigate } from 'react-router-dom'; 
 
 
 
@@ -11,6 +11,8 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('Home');
   
+const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +29,16 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
     { name: 'Features', icon: Lock },
     { name: 'Contact', icon: null }
   ];
+
+  const getPathFromName = (name) => {
+  switch (name) {
+    case 'Home': return '/';
+    case 'About': return '/about';
+    case 'Features': return '/features';
+    case 'Contact': return '/contact';
+    default: return '/';
+  }
+};
 
   return (
     <>
@@ -57,7 +69,10 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
               {navItems.map((item) => (
                 <li key={item.name} className="relative">
                   <button
-                    onClick={() => setActiveItem(item.name)}
+                    onClick={() =>{
+ setActiveItem(item.name);
+ navigate(getPathFromName(item.name));
+                    }}
                     className={`flex items-center gap-2 px-4 py-2 rounded-xl text-lg font-medium transition-all duration-300 group ${
                       activeItem === item.name 
                         ? 'bg-violet-600/30 text-violet-300 border border-violet-500/30' 
@@ -80,7 +95,7 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
               ))}
               
             
-              {/* Desktop Sign Up button */}
+              
               <li className="ml-4">
                 <button
                   className="group relative px-6 py-2.5 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-300 hover:scale-105 overflow-hidden"
@@ -128,6 +143,7 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
                   onClick={() => {
                     setActiveItem(item.name);
                     setIsMobileMenuOpen(false);
+                    navigate(getPathFromName(item.name));
                   }}
                   className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${
                     activeItem === item.name 
@@ -146,7 +162,7 @@ const Navbar = ({ setShowSignup, setShowLogin }) => {
             ))}
             
             
-            {/* Mobile Sign Up button */}
+           
             <li className="pt-4 border-t border-white/10">
               <button
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-300"

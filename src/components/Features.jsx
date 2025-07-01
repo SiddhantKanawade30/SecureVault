@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, Lock, Key, Eye, FileText, Database, Fingerprint, UserCheck, CloudLightning } from 'lucide-react';
+import { Shield, Lock, Eye, FileText, Database, UserCheck, CloudLightning } from 'lucide-react';
 
 export const Features = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +54,7 @@ export const Features = () => {
   ];
 
   return (
-    <div className={`py-20 px-6 min-h-screen bg-neutral-950 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    <div className={`py-20 px-6 min-h-screen  transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
       <div className="text-center text-white text-4xl font-bold mb-10">
         App Features
       </div>

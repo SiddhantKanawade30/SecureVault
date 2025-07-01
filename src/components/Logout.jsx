@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 
 export const Logout = ({ open, onClose }) => {
@@ -15,7 +15,7 @@ export const Logout = ({ open, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
       <div className="bg-neutral-900 text-white rounded-2xl shadow-lg p-6    w-[90%] max-w-sm relative">
         
-        {/* Close Icon */}
+        
         <button
           className="absolute top-3 right-3 text-gray-400 transition cursor-pointer "
           onClick={onClose}
@@ -23,12 +23,12 @@ export const Logout = ({ open, onClose }) => {
           <X size={20} />
         </button>
 
-        {/* Title */}
+       
         <h2 className="text-xl font-semibold mb-4 text-center">
           Are you sure you want to log out?
         </h2>
 
-        {/* Buttons */}
+        
         <div className="flex justify-center gap-4 mt-6">
           <button
             onClick={() => {

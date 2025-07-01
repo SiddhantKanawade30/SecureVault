@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Shield, Lock, Key, Eye, FileText, Database } from 'lucide-react';
-import { Signup } from './Signup';
+
 
 export const Hero = ({setShowSignup}) => {
   const [isVisible, setIsVisible] = useState(false);

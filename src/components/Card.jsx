@@ -33,7 +33,7 @@ const Card = ({ website, username, password, onEdit, onDelete }) => {
 
   return (
     <div className="bg-neutral-900 p-5 rounded-xl shadow hover:shadow-purple-600/20 transition border border-neutral-800 m-2">
-      {/* Header: Website & Action Buttons */}
+     
       <div className="flex justify-between items-center mb-4">
         {isEditing ? (
           <input
@@ -47,7 +47,7 @@ const Card = ({ website, username, password, onEdit, onDelete }) => {
         )}
 
         <div className="flex gap-2">
-          {/* Default state: edit + delete */}
+       
           {!isEditing && !confirmDelete && (
             <>
               <button
@@ -65,7 +65,7 @@ const Card = ({ website, username, password, onEdit, onDelete }) => {
             </>
           )}
 
-          {/* Delete confirmation: check + X */}
+          
           {confirmDelete && (
             <>
               <button onClick={onDelete} className="hover:bg-white/10 p-1 rounded">
@@ -80,7 +80,7 @@ const Card = ({ website, username, password, onEdit, onDelete }) => {
             </>
           )}
 
-          {/* Edit mode: save + cancel */}
+          
           {isEditing && (
             <>
               <button onClick={handleSave} className="hover:bg-white/10 p-1 rounded">
@@ -94,7 +94,7 @@ const Card = ({ website, username, password, onEdit, onDelete }) => {
         </div>
       </div>
 
-      {/* Username */}
+      
       <div className="flex justify-between mb-2">
         <div>
           <span className="text-gray-400 text-sm">Username: </span>
@@ -119,7 +119,7 @@ const Card = ({ website, username, password, onEdit, onDelete }) => {
         )}
       </div>
 
-      {/* Password */}
+      
       <div className="flex justify-between items-center">
         <div>
           <span className="text-gray-400 text-sm">Password: </span>

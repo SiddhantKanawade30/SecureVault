@@ -1,15 +1,8 @@
 import { useState, useEffect } from 'react';
 import { 
   Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
   Shield, 
   MessageCircle, 
-  Send,
-  CheckCircle,
-  AlertCircle,
-  Headphones,
   FileText,
   Users
 } from 'lucide-react';
@@ -43,7 +36,7 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus('success');
@@ -97,30 +90,11 @@ export default function ContactPage() {
     }
   ];
 
-  const officeLocations = [
-    {
-      city: "San Francisco",
-      address: "123 Security Blvd, Suite 500",
-      postal: "San Francisco, CA 94105",
-      phone: "+1 (415) 555-0123"
-    },
-    {
-      city: "New York",
-      address: "456 Privacy Ave, Floor 12",
-      postal: "New York, NY 10001",
-      phone: "+1 (212) 555-0456"
-    },
-    {
-      city: "London",
-      address: "789 Encryption St, Level 8",
-      postal: "London EC1A 1BB, UK",
-      phone: "+44 20 7555 0789"
-    }
-  ];
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 relative overflow-hidden">
-      {/* Animated background particles */}
+      
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0">
           {[...Array(30)].map((_, i) => (
@@ -139,7 +113,7 @@ export default function ContactPage() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 py-12">
-        {/* Header */}
+        
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="flex justify-center items-center gap-3 mb-6">
             <Shield className="w-12 h-12 text-violet-400" />
@@ -147,12 +121,10 @@ export default function ContactPage() {
               Contact Us
             </h1>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Get in touch with me for project collaborations, development opportunities, or any questions about secure application development.
-          </p>
+          
         </div>
 
-        {/* Contact Methods Grid */}
+        
         <div className={`mb-20 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactMethods.map((method, index) => {
@@ -189,7 +161,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* About Section */}
+        
         <div className={`mb-16 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700 rounded-3xl p-8 border border-zinc-700/50">
             <div className="flex items-center gap-3 mb-6">
@@ -229,33 +201,8 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Professional Notice */}
-        <div className={`bg-gradient-to-r from-violet-900/20 via-purple-900/20 to-indigo-900/20 rounded-3xl p-8 border border-violet-500/30 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="flex items-start gap-4">
-            <Shield className="w-8 h-8 text-violet-400 flex-shrink-0 mt-1" />
-            <div>
-              <h3 className="text-xl font-bold text-white mb-3">Let's Connect</h3>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                I'm passionate about building secure, scalable applications and always interested in discussing 
-                new projects, collaboration opportunities, or innovative ideas in web development and security.
-              </p>
-              <div className="flex flex-wrap gap-4 text-sm">
-                <div className="flex items-center gap-2 text-green-400">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Full-stack development</span>
-                </div>
-                <div className="flex items-center gap-2 text-green-400">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Security-focused solutions</span>
-                </div>
-                <div className="flex items-center gap-2 text-green-400">
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Modern tech stack expertise</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       
+        
       </div>
     </div>
   );

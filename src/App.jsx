@@ -1,32 +1,49 @@
-import Dashboard from "./pages/Dashboard"
-import {BrowserRouter , Route, Routes} from 'react-router-dom'
-import {Signup} from "./components/Signup"
-import {Login} from "./components/Login"
-// import { Create } from "./components/Create"
-import { Manager } from './components/Manager'
-import { Logout } from './components/Logout'
-import { About } from "./components/About"
-import ContactPage from "./components/Contact"
-import { Features } from "./components/Features"
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
+import {About} from './components/About';
+import {Features} from './components/Features';
+import Contact from './components/Contact';
+import { Signup } from './components/Signup';
+import { Login } from './components/Login';
 
-
-function App() {
+const App = () => {
+  const [showSignup, setShowSignup] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
+    <div class="absolute top-0 z-[-2] min-h-screen w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
+      <Navbar setShowSignup={setShowSignup} setShowLogin={setShowLogin} />
 
+      <Routes>
+        <Route path="/" element={<Dashboard setShowSignup={setShowSignup} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
 
-      <div class="absolute top-0 z-[-2] min-h-screen w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
-        {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/manager" element={<Manager  />}/>
-        </Routes>
-        </BrowserRouter> */}
-        <Features />
+     
+      <Signup
+        open={showSignup}
+        onClose={() => setShowSignup(false)}
+        switchToLogin={() => {
+          setShowSignup(false);
+          setShowLogin(true);
+        }}
+      />
+      <Login
+        open={showLogin}
+        onClose={() => setShowLogin(false)}
+        switchToSignup={() => {
+          setShowLogin(false);
+          setShowSignup(true);
+        }}
+      />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
