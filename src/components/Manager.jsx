@@ -98,7 +98,7 @@ useEffect(() => {
     }
 
     fetchVault()
-  },[])
+  },[credentials])
 
 
 
