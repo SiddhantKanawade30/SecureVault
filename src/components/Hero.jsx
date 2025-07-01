@@ -14,7 +14,7 @@ export const Hero = ({setShowSignup}) => {
   const features = [
     { icon: Shield, title: "Military-Grade Encryption", desc: "AES-256 encryption keeps your data fortress-strong" },
     { icon: Lock, title: "Zero-Knowledge Architecture", desc: "We can't see your data, even if we wanted to" },
-    { icon: Key, title: "Biometric Access", desc: "Your fingerprint is the only key that matters" },
+    { icon: Key, title: "Safe", desc: "All passwords are encrypted before storing in database" },
     { icon: Eye, title: "Privacy First", desc: "No tracking, no ads, no compromises" },
     { icon: FileText, title: "Document Vault", desc: "Store sensitive files with military precision" },
     { icon: Database, title: "Secure Backup", desc: "Multi-region redundancy for peace of mind" }
