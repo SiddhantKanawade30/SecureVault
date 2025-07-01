@@ -16,28 +16,7 @@ export const About = () => {
     { number: "Zero", label: "Data Breaches", icon: Globe }
   ];
 
-  const timeline = [
-    {
-      year: "2022",
-      title: "The Beginning",
-      description: "Started with a simple idea: make security accessible to everyone"
-    },
-    {
-      year: "2023",
-      title: "First Launch",
-      description: "Released our core security features with zero-knowledge architecture"
-    },
-    {
-      year: "2024",
-      title: "Enhanced Protection",
-      description: "Added biometric access and advanced encryption protocols"
-    },
-    {
-      year: "2025",
-      title: "Today",
-      description: "Continuously improving to keep your data safe and secure"
-    }
-  ];
+
 
   const values = [
     {
@@ -143,40 +122,7 @@ export const About = () => {
       </div>
 
       
-      <div className={`relative z-10 px-4 mb-20 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
-              Our Journey
-            </span>
-          </h2>
-          <div className="space-y-8">
-            {timeline.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-6 group"
-                onMouseEnter={() => setActiveSection(index)}
-              >
-                <div className="flex-shrink-0">
-                  <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center font-bold text-lg transition-all duration-500 ${
-                    activeSection === index 
-                      ? 'border-violet-400 bg-violet-400/20 text-violet-300 scale-110' 
-                      : 'border-zinc-600 bg-zinc-800 text-gray-400'
-                  }`}>
-                    {item.year.slice(-2)}
-                  </div>
-                </div>
-                <div className="flex-1 pb-8">
-                  <div className="bg-gradient-to-br from-zinc-800 via-zinc-700 to-zinc-600 rounded-2xl p-6 border border-zinc-700/50 hover:border-violet-500/50 transition-all duration-500 group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-violet-500/10">
-                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
-                    <p className="text-gray-300 leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      
 
       
       <div className={`relative z-10 px-4 mb-20 transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Shield, Lock, Key, Eye, FileText, Database } from 'lucide-react';
+import { Shield, Lock, Key, Eye, FileText, Database , Heart } from 'lucide-react';
 
 
 export const Hero = ({setShowSignup}) => {
@@ -164,28 +164,10 @@ export const Hero = ({setShowSignup}) => {
           </div>
         </div>
       </div>
-
+<div className='flex justify-center text-white p-4 items-center gap-0.5'>
+    <div >made with </div><div><Heart size={15} fill='red' className='text-red-700'/></div> <div> by Siddhant Kanawade</div>
+</div>
       
-      <div className={`flex justify-center mt-16 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="flex flex-wrap justify-center gap-8 text-gray-400 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span>SOC 2 Certified</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-            <span>GDPR Compliant</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-            <span>ISO 27001</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-            <span>99.9% Uptime</span>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

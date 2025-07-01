@@ -22,9 +22,15 @@ export const Login = ({ open, onClose, switchToSignup }) => {
         password,
       });
 
+       if (response.status === 200 && response.data.token) {
       localStorage.setItem("token", response.data.token);
       onClose();
       navigate("/manager");
+    } else {
+      alert("Invalid credentials");
+    }
+      
+      
     } catch (e) {
       console.log("there was some error");
       alert("Invalid credentials");

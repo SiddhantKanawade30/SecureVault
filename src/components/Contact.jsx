@@ -79,14 +79,6 @@ export default function ContactPage() {
       secondary: "Open to new opportunities",
       color: "purple",
       description: "Interested in discussing projects, partnerships, or development work"
-    },
-    {
-      icon: Shield,
-      title: "Security Expertise",
-      primary: "Vault Solutions",
-      secondary: "Secure application development",
-      color: "cyan",
-      description: "Specialized in building secure, robust applications with modern tech stack"
     }
   ];
 
