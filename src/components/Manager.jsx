@@ -22,6 +22,7 @@ if (!token) {
 }
 
 const masterPassword = import.meta.env.VITE_MASTER_PASS;
+const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 const decryptPassword = (cipherText, masterPassword) => {
   const bytes = CryptoJS.AES.decrypt(cipherText, masterPassword);
@@ -42,7 +43,7 @@ useEffect(() => {
   const handleDelete = async({credentialId}) => {
 
     try{
-    await axios.delete("http://localhost:3000/delete",{
+    await axios.delete(`${backendUrl}/delete`,{
         headers:{
         token : localStorage.getItem("token")
       },
@@ -58,7 +59,7 @@ useEffect(() => {
         const { _id: credentialId, website: newURL, username: newUsername, password: newPassword } = updatedData;
 
         try{
-    await axios.put("http://localhost:3000/edit",{
+    await axios.put(`${backendUrl}/edit`,{
       credentialId,
       url : newURL,
       userName : newUsername,
@@ -85,7 +86,7 @@ useEffect(() => {
   useEffect(()=>{
     const fetchVault = async()=>{
       try{
-        const res = await axios.get("http://localhost:3000/vault",{
+        const res = await axios.get(`${backendUrl}/vault`,{
           headers : {
             token : localStorage.getItem("token")
           }

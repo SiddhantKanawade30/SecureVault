@@ -14,6 +14,7 @@ export const Create = ({ open, onClose }) => {
   const PasswordRef = useRef();
 
   const masterPassword = import.meta.env.VITE_MASTER_PASS
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   const encryptPassword = (plainText, masterPassword) => {
     return CryptoJS.AES.encrypt(plainText, masterPassword).toString();
@@ -27,7 +28,7 @@ export const Create = ({ open, onClose }) => {
     const encryptedPass = encryptPassword(PasswordRef.current.value,masterPassword)
     
     try{
-      await axios.post("http://localhost:3000/create",{
+      await axios.post(`${backendUrl}/create`,{
       url,
       userName,
       password : encryptedPass

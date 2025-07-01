@@ -13,8 +13,10 @@ export const Signup = ({ open, onClose , switchToLogin  }) => {
       const userName = fullNameRef.current.value;
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
+        const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-      axios.post("http://localhost:3000/signup",{
+
+      axios.post(`${backendUrl}/signup`,{
         userName,
         email,
         password

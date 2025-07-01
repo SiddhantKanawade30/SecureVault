@@ -8,6 +8,8 @@ export const Login = ({ open, onClose , switchToSignup }) => {
 const emailRef = useRef()
 const passwordRef = useRef()
 const navigate = useNavigate()
+        const backendUrl = import.meta.env.VITE_BACKEND_URL
+
 
 const login = async(e) =>{
   e.preventDefault()
@@ -15,7 +17,7 @@ const login = async(e) =>{
   const password = passwordRef.current.value
 
   try{
-  const response = await axios.post("http://localhost:3000/login",{
+  const response = await axios.post(`${backendUrl}/login`,{
     email,
     password
   })
