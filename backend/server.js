@@ -65,7 +65,7 @@ app.post("/create",userMiddleware, async(req,res)=>{
         const { url , userName , password} = req.body
 
         try {
-            await passModel.create({
+            const newCredentials = await passModel.create({
                 userId : req.userId,
                 url,
                 userName,
@@ -73,7 +73,8 @@ app.post("/create",userMiddleware, async(req,res)=>{
             })
 
             res.status(201).json({
-                message : "credentials created sucessfully"
+                message : "credentials created sucessfully",
+                content : newCredentials
             })
         }catch(e){
             console.error(e);

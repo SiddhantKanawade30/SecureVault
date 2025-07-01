@@ -1,108 +1,124 @@
 import { Plus, Lock, LogOut } from "lucide-react";
-import React, { useState ,useEffect } from "react";
-import { Logout } from "./Logout";    
+import React, { useState, useEffect } from "react";
+import { Logout } from "./Logout";
 import { Create } from "./Create";
 import Card from "./Card";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 
-
-
-
 export const Manager = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [createCardOpen, setCreateCardOpen] = useState(false);
   const [credentials, setCredentials] = useState([]);
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const token = localStorage.getItem("token");
-if (!token) {
-  navigate("/")
-}
-
-const masterPassword = import.meta.env.VITE_MASTER_PASS;
-const backendUrl = import.meta.env.VITE_BACKEND_URL
-
-const decryptPassword = (cipherText, masterPassword) => {
-  const bytes = CryptoJS.AES.decrypt(cipherText, masterPassword);
-  return bytes.toString(CryptoJS.enc.Utf8);
-};
-useEffect(() => {
   const token = localStorage.getItem("token");
   if (!token) {
     navigate("/");
   }
-}, [navigate]);
+
+  const masterPassword = import.meta.env.VITE_MASTER_PASS;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const decryptPassword = (cipherText, masterPassword) => {
+    try {
+      const bytes = CryptoJS.AES.decrypt(cipherText, masterPassword);
+      return bytes.toString(CryptoJS.enc.Utf8);
+    } catch (e) {
+      console.error("Password decryption failed:", e);
+      return "[Decryption Error]";
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleLogout = () => {
     setLogoutOpen(true);
     console.log("Logged out");
   };
 
-  const handleDelete = async({credentialId}) => {
-
-    try{
-    await axios.delete(`${backendUrl}/delete`,{
-        headers:{
-        token : localStorage.getItem("token")
-      },
-      data: { credentialId }
-    })
-    setCredentials(credentials.filter((cred) => cred._id !== credentialId));
-  }catch (err) {
+  const handleDelete = async ({ credentialId }) => {
+    try {
+      await axios.delete(`${backendUrl}/delete`, {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+        data: { credentialId },
+      });
+      setCredentials(credentials.filter((cred) => cred._id !== credentialId));
+    } catch (err) {
       console.error("Delete error:", err);
     }
-  }
+  };
 
-  const handleEdit = async(updatedData)=>{
-        const { _id: credentialId, website: newURL, username: newUsername, password: newPassword } = updatedData;
+  const handleEdit = async (updatedData) => {
+    const {
+      _id: credentialId,
+      website: newURL,
+      username: newUsername,
+      password: newPassword,
+    } = updatedData;
 
-        try{
-    await axios.put(`${backendUrl}/edit`,{
-      credentialId,
-      url : newURL,
-      userName : newUsername,
-      password : newPassword
-    },{
-      headers : {
-        token : localStorage.getItem("token")
-      }
-    })
+    try {
+      const encryptedPassword = CryptoJS.AES.encrypt(
+        newPassword,
+        masterPassword
+      ).toString();
 
-    setCredentials((prev) =>
+      await axios.put(
+        `${backendUrl}/edit`,
+        {
+          credentialId,
+          url: newURL,
+          userName: newUsername,
+          password: encryptedPassword,
+        },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      setCredentials((prev) =>
         prev.map((cred) =>
           cred._id === credentialId
-            ? { ...cred, url: newURL, userName: newUsername, password: newPassword }
+            ? {
+                ...cred,
+                url: newURL,
+                userName: newUsername,
+                password: encryptedPassword,
+              }
             : cred
         )
       );
-
-  }catch (err) {
+    } catch (err) {
       console.error("Edit error:", err);
     }
-  }
+  };
 
-  useEffect(()=>{
-    const fetchVault = async()=>{
-      try{
-        const res = await axios.get(`${backendUrl}/vault`,{
-          headers : {
-            token : localStorage.getItem("token")
-          }
-        })
-        setCredentials(res.data.content)
-
-      }catch(e){
+  useEffect(() => {
+    const fetchVault = async () => {
+      try {
+        const res = await axios.get(`${backendUrl}/vault`, {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        });
+        setCredentials(res.data.content);
+      } catch (e) {
         console.error("Error fetching vault:", e);
       }
-    }
+    };
 
-    fetchVault()
-  },[credentials])
-
-
-
+    fetchVault();
+  }, []);
 
   return (
     <div className="min-h-screen bg-neutral-950 text-white px-6 py-10">
@@ -116,12 +132,21 @@ useEffect(() => {
 
         {/* Action Buttons */}
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 transition px-4 py-2 rounded-lg text-sm font-medium" onClick={() => setCreateCardOpen(true)}>
+          <button
+            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 transition px-4 py-2 rounded-lg text-sm font-medium"
+            onClick={() => setCreateCardOpen(true)}
+          >
             <Plus size={18} />
             Create New
           </button>
 
-          <Create open={createCardOpen} onClose={() => setCreateCardOpen(false)} />
+          <Create
+            open={createCardOpen}
+            onClose={() => setCreateCardOpen(false)}
+            onCreate={(newCredential) =>
+    setCredentials((prev) => [...prev, newCredential])
+  }
+          />
 
           <button
             onClick={handleLogout}
@@ -138,15 +163,16 @@ useEffect(() => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {credentials.map((cred) => (
           <div>
-          <Card
-            key={cred._id}
-            website={cred.url}
-            username={cred.userName}
-            password= {decryptPassword(cred.password,masterPassword)}
-            onDelete={() => handleDelete({ credentialId: cred._id })}
-            onEdit={(updated) => handleEdit({ ...updated, _id: cred._id })}
-          />
-            </div>
+            <Card
+              key={cred._id}
+              website={cred.url}
+              username={cred.userName}
+              password={decryptPassword(cred.password, masterPassword)}
+              onDelete={() => handleDelete({ credentialId: cred._id })}
+              onEdit={(updated) => handleEdit({ ...updated, _id: cred._id })}
+              
+            />
+          </div>
         ))}
       </div>
     </div>

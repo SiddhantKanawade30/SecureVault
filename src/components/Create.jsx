@@ -7,42 +7,52 @@ import CryptoJS from "crypto-js";
 const inputStyle =
   "bg-black/30 p-3 rounded-lg outline-none focus:ring-2 focus:ring-purple-500 w-full text-white placeholder-gray-300";
 
-export const Create = ({ open, onClose }) => {
+export const Create = ({ open, onClose, onCreate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const UrlRef = useRef();
   const UsernameRef = useRef();
   const PasswordRef = useRef();
 
-  const masterPassword = import.meta.env.VITE_MASTER_PASS
-  const backendUrl = import.meta.env.VITE_BACKEND_URL
+  const masterPassword = import.meta.env.VITE_MASTER_PASS;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const encryptPassword = (plainText, masterPassword) => {
     return CryptoJS.AES.encrypt(plainText, masterPassword).toString();
   };
 
-  
-
-  const saveCredentials = async() => {
+  const saveCredentials = async () => {
     const url = UrlRef.current.value;
     const userName = UsernameRef.current.value;
-    const encryptedPass = encryptPassword(PasswordRef.current.value,masterPassword)
-    
-    try{
-      await axios.post(`${backendUrl}/create`,{
-      url,
-      userName,
-      password : encryptedPass
-    },{
-      headers : {
-        token : localStorage.getItem("token")
-      }
-    })
-    }catch(error){
-      console.error("Error saving credential:", error);
-    alert("Failed to save credentials.");
+    const encryptedPass = encryptPassword(
+      PasswordRef.current.value,
+      masterPassword
+    );
+
+    try {
+      const res = await axios.post(
+        `${backendUrl}/create`,
+        {
+          url,
+          userName,
+          password: encryptedPass,
+        },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (res.data?.content) {
+      onCreate?.(res.data.content);
+      onClose(); 
+    } else {
+      throw new Error("Invalid response from backend");
     }
-    
-  }
+    } catch (error) {
+      console.error("Error saving credential:", error);
+      alert("Failed to save credentials.");
+    }
+  };
 
   if (!open) return null;
 
@@ -95,10 +105,10 @@ export const Create = ({ open, onClose }) => {
             </div>
 
             <button
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault();
-                saveCredentials();
-                onClose();
+                await saveCredentials();
+                
               }}
               type="submit"
               className="mt-4 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition font-medium"
