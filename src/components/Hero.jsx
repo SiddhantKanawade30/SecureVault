@@ -49,7 +49,7 @@ export const Hero = ({setShowSignup}) => {
         </div>
         <div className="flex justify-center text-gray-300 text-2xl mt-6 font-sans max-w-2xl mx-auto text-center px-4">
           <div className="leading-relaxed">
-            Your digital fortress for the world's most sensitive information
+            Your digital fortress for the world's most sensitive information(password-manager)
           </div>
         </div>
       </div>
