@@ -9,6 +9,7 @@ import { Signup } from './components/Signup';
 import { Login } from './components/Login';
 import {Manager} from './components/Manager'
 import { useLocation } from 'react-router-dom';
+import Error from './components/Error';
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const hideNavbar = hideNavbarRoutes.includes(location.pathname);
         <Route path="/features" element={<Features />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/manager" element={<Manager />} />
+        <Route path="*" element={<Error />} />
       </Routes>
 
      
